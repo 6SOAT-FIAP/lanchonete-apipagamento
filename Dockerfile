@@ -1,8 +1,8 @@
-# Usando a imagem do Maven para compilar o aplicativo
-FROM maven:3.8.3-openjdk-17 AS builder
+# Usando a imagem Maven baseada no Alpine
+FROM maven:3.8.3-openjdk-17-alpine AS builder
 
 # Instalar o AWS CLI
-RUN apk add --no-cache aws-cli
+RUN apk update && apk add --no-cache python3 py3-pip && pip3 install awscli
 
 # Configurar o perfil de credenciais
 RUN mkdir -p /root/.aws && \
