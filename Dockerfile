@@ -2,7 +2,7 @@
 FROM maven:3.8.3-openjdk-17 AS builder
 
 # Instalar o AWS CLI
-RUN apt-get update && apt-get install -y awscli
+RUN apk add --no-cache aws-cli
 
 # Configurar o perfil de credenciais
 RUN mkdir -p /root/.aws && \
