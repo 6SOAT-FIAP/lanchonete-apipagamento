@@ -13,3 +13,15 @@ variable "vpc_id" {
   description = "VPC ID"
   type        = string
 }
+
+variable "aws_access_key_id" {
+  description = "Chave de acesso da AWS"
+  type        = string
+  sensitive   = true
+}
+
+variable "aws_secret_access_key" {
+  description = "Chave AWS"
+  type        = string
+  sensitive   = true
+}
