@@ -1,16 +1,10 @@
-# Usando a imagem Maven baseada no Alpine
-FROM maven:3.8.3-openjdk-17-alpine AS builder
+# Usando a imagem do Maven para compilar o aplicativo
+FROM maven:3.8.3-openjdk-17 AS builder
 
-# Instalar o AWS CLI
-RUN apk update && apk add --no-cache python3 py3-pip && pip3 install awscli
-
-# Configurar o perfil de credenciais
-RUN mkdir -p /root/.aws && \
-    echo "[default]" > /root/.aws/credentials && \
-    echo "aws_access_key_id=your-access-key-id" >> /root/.aws/credentials && \
-    echo "aws_secret_access_key=your-secret-access-key" >> /root/.aws/credentials && \
-    echo "[default]" > /root/.aws/config && \
-    echo "region=us-east-1" >> /root/.aws/config
+# Definindo as credenciais da AWS - alternativa lab role
+ENV AWS_ACCESS_KEY_ID=ASIA2VKUD45EHE3F4YOZ
+ENV AWS_SECRET_ACCESS_KEY=O0RErDZjzd+BUZ+c//Pj5zNwrBZqjtwO6WIOnFGp
+ENV AWS_DEFAULT_REGION=us-east-1
 
 # Definindo o diretório de trabalho no contêiner
 WORKDIR /app
