@@ -13,6 +13,17 @@ resource "aws_ecs_task_definition" "api_task" {
   network_mode             = "awsvpc"
   cpu                      = "256"
   memory                   = "512"
+  environment = [
+    {
+      name  = "AWS_ACCESS_KEY_ID"
+      value = var.aws_access_key_id
+    },
+    {
+      name  = "AWS_SECRET_ACCESS_KEY"
+      value = var.aws_secret_access_key
+    }
+  ]
+
 
   container_definitions = jsonencode([{
     name      = "api-container"

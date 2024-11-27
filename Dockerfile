@@ -1,11 +1,6 @@
 # Usando a imagem do Maven para compilar o aplicativo
 FROM maven:3.8.3-openjdk-17 AS builder
 
-# Definindo as credenciais da AWS - alternativa lab role
-ENV AWS_ACCESS_KEY_ID=ASIA2VKUD45EHE3F4YOZ
-ENV AWS_SECRET_ACCESS_KEY=O0RErDZjzd+BUZ+c//Pj5zNwrBZqjtwO6WIOnFGp
-ENV AWS_DEFAULT_REGION=us-east-1
-
 # Definindo o diretório de trabalho no contêiner
 WORKDIR /app
 
