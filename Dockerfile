@@ -1,6 +1,17 @@
 # Usando a imagem do Maven para compilar o aplicativo
 FROM maven:3.8.3-openjdk-17 AS builder
 
+# Instalar o AWS CLI
+RUN apt-get update && apt-get install -y awscli
+
+# Configurar o perfil de credenciais
+RUN mkdir -p /root/.aws && \
+    echo "[default]" > /root/.aws/credentials && \
+    echo "aws_access_key_id=your-access-key-id" >> /root/.aws/credentials && \
+    echo "aws_secret_access_key=your-secret-access-key" >> /root/.aws/credentials && \
+    echo "[default]" > /root/.aws/config && \
+    echo "region=us-east-1" >> /root/.aws/config
+
 # Definindo o diretório de trabalho no contêiner
 WORKDIR /app
 
