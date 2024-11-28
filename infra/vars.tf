@@ -25,3 +25,8 @@ variable "aws_secret_access_key" {
   type        = string
   sensitive   = true
 }
+
+variable "webhook_path" {
+  description = "Path do webhook"
+  type        = string
+}
