@@ -110,7 +110,7 @@ resource "aws_ecs_service" "api_service" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.api_target_group.arn
-    container_name   = "api-pagamento-container"
+    container_name   = "api-container-pagamento"
     container_port   = 8080
   }
 }
