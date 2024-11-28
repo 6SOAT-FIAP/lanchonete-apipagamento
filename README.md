@@ -36,7 +36,7 @@ docker-compose up -d
 
 ## Collection
 
-Acesse a [**collection**](assets/collection/API PAGAMENTO.postman_collection.json) do Postman com todas as APIs desenvolvidas.
+Acesse a [**collection**](assets/collection/API_PAGAMENTO.postman_collection.json) do Postman com todas as APIs desenvolvidas.
 
 ## Guia instrutivo
 
