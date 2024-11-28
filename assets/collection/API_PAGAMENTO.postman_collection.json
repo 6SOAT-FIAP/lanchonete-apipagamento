@@ -21,10 +21,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://api-alb-1214587122.us-east-1.elb.amazonaws.com/api/v1/pagamento",
+					"raw": "http://lanchonete-alb-2109012903.us-east-1.elb.amazonaws.com/api/v1/pagamento",
 					"protocol": "http",
 					"host": [
-						"api-alb-1214587122",
+						"lanchonete-alb-2109012903",
 						"us-east-1",
 						"elb",
 						"amazonaws",
@@ -54,10 +54,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://api-alb-1214587122.us-east-1.elb.amazonaws.com",
+					"raw": "http://lanchonete-alb-2109012903.us-east-1.elb.amazonaws.com",
 					"protocol": "http",
 					"host": [
-						"api-alb-1214587122",
+						"lanchonete-alb-2109012903",
 						"us-east-1",
 						"elb",
 						"amazonaws",
