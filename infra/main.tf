@@ -119,7 +119,6 @@ resource "aws_dynamodb_table" "pagamento_table" {
   name           = "tb_pagamento"
   billing_mode   = "PAY_PER_REQUEST"
   hash_key       = "id"
-  region         = "us-east-1"
 
   attribute {
     name = "id"
