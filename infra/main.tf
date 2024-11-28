@@ -32,6 +32,10 @@ resource "aws_ecs_task_definition" "api_task" {
       {
         name  = "AWS_SECRET_ACCESS_KEY"
         value = var.aws_secret_access_key
+      },
+      {
+        name  = "WEBHOOK_PATH"
+        value = var.webhook_path
       }
     ]
     logConfiguration = {
