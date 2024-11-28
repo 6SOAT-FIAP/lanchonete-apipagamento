@@ -97,7 +97,7 @@ resource "aws_lb_listener" "api_listener" {
 
 resource "aws_ecs_service" "api_service" {
   name            = "api-pagamento-service"
-  cluster         = var.ecs_cluster_id
+  cluster         = var.ecs_cluster_arn
   task_definition = aws_ecs_task_definition.api_task.arn
   launch_type     = "FARGATE"
   desired_count   = 1

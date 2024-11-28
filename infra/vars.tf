@@ -14,7 +14,7 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "ecs_cluster_id" {
+variable "ecs_cluster_arn" {
   description = "ID do cluster ECS"
   type        = string
 }
