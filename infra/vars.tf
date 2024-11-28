@@ -14,6 +14,16 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "ecs_cluster_id" {
+  description = "ID do cluster ECS"
+  type        = string
+}
+
+variable "load_balancer_arn" {
+  description = "ARN do Load Balancer"
+  type        = string
+}
+
 variable "aws_access_key_id" {
   description = "Chave de acesso da AWS"
   type        = string

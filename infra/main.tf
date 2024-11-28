@@ -1,21 +1,17 @@
 resource "aws_cloudwatch_log_group" "ecs_log_group" {
-  name              = "/ecs/api-container"
+  name              = "/ecs/api-pagamento"
   retention_in_days = 7
 }
 
-resource "aws_ecs_cluster" "api_cluster" {
-  name = "api-cluster"
-}
-
 resource "aws_ecs_task_definition" "api_task" {
-  family                   = "api-task"
+  family                   = "api-pagamento-task"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = "256"
   memory                   = "512"
 
   container_definitions = jsonencode([{
-    name      = "api-container"
+    name      = "api-container-pagamento"
     image     = "733005211464.dkr.ecr.us-east-1.amazonaws.com/lanchonete-apipagamento:latest"
     portMappings = [
       {
@@ -41,7 +37,7 @@ resource "aws_ecs_task_definition" "api_task" {
     logConfiguration = {
       logDriver = "awslogs"
       options = {
-        awslogs-group         = "/ecs/api-container"
+        awslogs-group         = "/ecs/api-pagamento"
         awslogs-region        = "us-east-1"
         awslogs-stream-prefix = "ecs"
       }
@@ -53,7 +49,7 @@ resource "aws_ecs_task_definition" "api_task" {
 }
 
 resource "aws_security_group" "ecs_service_sg" {
-  name   = "ecs-service-sg"
+  name   = "ecs-pagamento-service-sg"
   vpc_id = var.vpc_id
 
   ingress {
@@ -71,38 +67,8 @@ resource "aws_security_group" "ecs_service_sg" {
   }
 }
 
-resource "aws_security_group" "alb_sg" {
-  name   = "alb-sg"
-  vpc_id = var.vpc_id
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-resource "aws_lb" "api_alb" {
-  name               = "api-alb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.alb_sg.id]
-  subnets            = var.subnet_ids
-  enable_deletion_protection = false
-
-  enable_cross_zone_load_balancing = true
-}
-
 resource "aws_lb_target_group" "api_target_group" {
-  name     = "api-target-group"
+  name     = "api-pagamento-target-group"
   port     = 8080
   protocol = "HTTP"
   vpc_id   = var.vpc_id
@@ -119,7 +85,7 @@ resource "aws_lb_target_group" "api_target_group" {
 }
 
 resource "aws_lb_listener" "api_listener" {
-  load_balancer_arn = aws_lb.api_alb.arn
+  load_balancer_arn = var.load_balancer_arn
   port              = "80"
   protocol          = "HTTP"
 
@@ -130,8 +96,8 @@ resource "aws_lb_listener" "api_listener" {
 }
 
 resource "aws_ecs_service" "api_service" {
-  name            = "api-service"
-  cluster         = aws_ecs_cluster.api_cluster.id
+  name            = "api-pagamento-service"
+  cluster         = var.ecs_cluster_id
   task_definition = aws_ecs_task_definition.api_task.arn
   launch_type     = "FARGATE"
   desired_count   = 1
@@ -144,7 +110,19 @@ resource "aws_ecs_service" "api_service" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.api_target_group.arn
-    container_name   = "api-container"
+    container_name   = "api-pagamento-container"
     container_port   = 8080
+  }
+}
+
+resource "aws_dynamodb_table" "pagamento_table" {
+  name           = "tb_pagamento"
+  billing_mode   = "PAY_PER_REQUEST"
+  hash_key       = "id"
+  region         = "us-east-1"
+
+  attribute {
+    name = "id"
+    type = "S"
   }
 }
