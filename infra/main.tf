@@ -45,6 +45,7 @@ resource "aws_ecs_task_definition" "api_task" {
   }])
 
   execution_role_arn = "arn:aws:iam::733005211464:role/LabRole"
+  task_role_arn      = "arn:aws:iam::733005211464:role/LabRole"
 }
 
 resource "aws_security_group" "ecs_service_sg" {
