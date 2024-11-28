@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "91d4de21-0a21-4200-badb-79fc67741330",
+		"name": "API PAGAMENTO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31739777"
+	},
+	"item": [
+		{
+			"name": "Realizar pagamento pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"numeroPedido\": \"a23bb9c7-c319-4694-9754-9573b9b8b100\",\r\n  \"metodoPagamento\": \"PIX\",\r\n  \"valorTotal\": 10.00,\r\n  \"itens\": [\r\n    {\r\n        \"nome\": \"X-bacon\",\r\n        \"categoria\": \"LANCHE\",\r\n        \"preco\": 10.00,\r\n        \"descricao\": \"Pão, carne, queijo e bacon\"\r\n        }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://api-alb-1214587122.us-east-1.elb.amazonaws.com/api/v1/pagamento",
+					"protocol": "http",
+					"host": [
+						"api-alb-1214587122",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"pagamento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Processar pagamento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"resource\": \"a23bb9c7-c319-4694-9754-9573b9b8bf26\",\r\n  \"topic\": \"topic\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://api-alb-1214587122.us-east-1.elb.amazonaws.com",
+					"protocol": "http",
+					"host": [
+						"api-alb-1214587122",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

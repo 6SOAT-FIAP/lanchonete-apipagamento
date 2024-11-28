@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  dynamodb:
+    image: amazon/dynamodb-local
+    container_name: dynamodb
+    ports:
+      - '8000:8000'
+    environment:
+      - AWS_REGION=us-east-1
+    restart: on-failure
+    logging:
+      options:
+        max-size: 1g
