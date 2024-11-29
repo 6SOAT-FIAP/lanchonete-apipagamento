@@ -84,12 +84,17 @@ resource "aws_lb_target_group" "api_target_group" {
   }
 }
 
-resource "aws_lb_listener" "api_listener" {
-  load_balancer_arn = var.load_balancer_arn
-  port              = "80"
-  protocol          = "HTTP"
+resource "aws_lb_listener_rule" "pagamento_rule" {
+  listener_arn = var.api_listener_arn
+  priority     = 10
 
-  default_action {
+  condition {
+    path_pattern {
+      values = ["/api/v1/pagamento*"]
+    }
+  }
+
+  action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.api_target_group.arn
   }

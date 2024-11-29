@@ -24,6 +24,11 @@ variable "load_balancer_arn" {
   type        = string
 }
 
+variable "api_listener_arn" {
+  description = "O ARN do listener do Load Balancer"
+  type        = string
+}
+
 variable "aws_access_key_id" {
   description = "Chave de acesso da AWS"
   type        = string
