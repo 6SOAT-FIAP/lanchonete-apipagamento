@@ -86,7 +86,7 @@ resource "aws_lb_target_group" "api_target_group" {
 
 resource "aws_lb_listener_rule" "pagamento_rule" {
   listener_arn = var.api_listener_arn
-  priority     = 10
+  priority     = 20
 
   condition {
     path_pattern {
