@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class DynamoConfigTest {
+class DynamoConfigLocalTest {
 
     @Test
-    void testAmazonDynamoDBBean() {
+    void testAmazonDynamoDBBeanLocalProfile() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         ConfigurableEnvironment environment = context.getEnvironment();
 
-        environment.setActiveProfiles("default");
-        context.register(DynamoConfig.class);
+        environment.setActiveProfiles("local");
+        context.register(DynamoConfigLocal.class);
         context.refresh();
 
         AmazonDynamoDB amazonDynamoDB = context.getBean(AmazonDynamoDB.class);
