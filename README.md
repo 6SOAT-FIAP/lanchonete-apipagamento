@@ -71,6 +71,7 @@ Variáveis de ambiente:
 |--------------------------|-------------------------------------------------|
 | `SPRING_PROFILES_ACTIVE` | Perfil ativo do Spring para definir o ambiente. |
 | `WEBHOOK_PATH`           | Caminho da URL do webhook.                      |
+| `PEDIDO_PATH`            | Caminho da URL da API de pedidos.               |
 
 ## Como executar o Cucumber localmente
 
