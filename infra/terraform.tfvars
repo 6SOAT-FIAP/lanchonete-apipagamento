@@ -6,3 +6,4 @@ api_listener_arn      = "arn:aws:elasticloadbalancing:us-east-1:733005211464:lis
 aws_access_key_id     = "ASIA2VKUD45EEXXJ52XW"
 aws_secret_access_key = "V69DsdBqxqagOcnxXw2QHsoR3tdHY/g+Ak+J2yPf"
 webhook_path          = "http://lanchonete-alb-436522991.us-east-1.elb.amazonaws.com"
+pedido_path           = "http://lanchonete-alb-436522991.us-east-1.elb.amazonaws.com/api/v1/pedido/"

@@ -45,3 +45,8 @@ variable "webhook_path" {
   description = "Path do webhook"
   type        = string
 }
+
+variable "pedido_path" {
+  description = "Path atualização pedido após pagamento"
+  type        = string
+}

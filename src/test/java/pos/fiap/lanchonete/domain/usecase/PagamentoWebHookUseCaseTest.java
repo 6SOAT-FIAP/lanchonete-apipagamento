@@ -7,6 +7,7 @@ import pos.fiap.lanchonete.domain.enums.StatusPagamentoEnum;
 import pos.fiap.lanchonete.domain.model.DadosPagamento;
 import pos.fiap.lanchonete.port.MercadoPagoPort;
 import pos.fiap.lanchonete.port.PagamentoUseCasePort;
+import pos.fiap.lanchonete.port.PedidoPort;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,6 +19,9 @@ class PagamentoWebHookUseCaseTest {
 
     @Mock
     private PagamentoUseCasePort pagamentoUseCasePort;
+
+    @Mock
+    private PedidoPort pedidoPort;
 
     @InjectMocks
     private PagamentoWebHookUseCase pagamentoWebHookUseCase;
@@ -41,6 +45,7 @@ class PagamentoWebHookUseCaseTest {
         verify(mercadoPagoPort, times(1)).obterNumeroPedido(merchantOrderId);
         verify(pagamentoUseCasePort, times(1)).obterDadosPagamento(numeroPedido);
         verify(pagamentoUseCasePort, times(1)).atualizarPagamento(dadosPagamento);
+        verify(pedidoPort, times(1)).atualizarStatusPedido(anyString());
 
         assertEquals(StatusPagamentoEnum.APROVADO, dadosPagamento.getStatusPagamento());
     }
