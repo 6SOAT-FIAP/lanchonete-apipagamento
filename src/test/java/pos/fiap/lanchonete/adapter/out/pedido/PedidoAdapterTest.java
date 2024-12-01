@@ -35,10 +35,11 @@ class PedidoAdapterTest {
     private PedidoAdapter pedidoAdapter;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
         when(webClientBuilder.build()).thenReturn(webClient);
-        pedidoAdapter = new PedidoAdapter(webClientBuilder, "http://mock-pedido/");
+        pedidoAdapter = new PedidoAdapter(webClientBuilder);
+        setPrivateField(pedidoAdapter, "atualizacaoPedidoUrl", "http://mock-pedido/");
     }
 
     @Test
@@ -81,5 +82,11 @@ class PedidoAdapterTest {
         verify(requestBodyUriSpec).header(eq("Content-Type"), eq("application/json"));
         verify(requestBodyUriSpec).bodyValue(Map.of("statusPedido", "EM_PREPARACAO"));
         verify(requestHeadersSpec).retrieve();
+    }
+
+    private void setPrivateField(Object target, String fieldName, Object value) throws Exception {
+        var field = target.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        field.set(target, value);
     }
 }
