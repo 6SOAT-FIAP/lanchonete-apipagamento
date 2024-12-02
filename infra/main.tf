@@ -32,6 +32,10 @@ resource "aws_ecs_task_definition" "api_task" {
       {
         name  = "WEBHOOK_PATH"
         value = var.webhook_path
+      },
+      {
+        name  = "PEDIDO_PATH"
+        value = var.pedido_path
       }
     ]
     logConfiguration = {

@@ -7,6 +7,7 @@ import pos.fiap.lanchonete.domain.model.DadosPagamento;
 import pos.fiap.lanchonete.port.MercadoPagoPort;
 import pos.fiap.lanchonete.port.PagamentoUseCasePort;
 import pos.fiap.lanchonete.port.PagamentoWebHookPort;
+import pos.fiap.lanchonete.port.PedidoPort;
 
 import static pos.fiap.lanchonete.domain.enums.StatusPagamentoEnum.APROVADO;
 
@@ -16,6 +17,7 @@ import static pos.fiap.lanchonete.domain.enums.StatusPagamentoEnum.APROVADO;
 public class PagamentoWebHookUseCase implements PagamentoWebHookPort {
     private final MercadoPagoPort mercadoPagoPort;
     private final PagamentoUseCasePort pagamentoUseCasePort;
+    private final PedidoPort pedidoPort;
 
     @Override
     public void processarPagamento(String merchantOrderId) {
@@ -24,6 +26,8 @@ public class PagamentoWebHookUseCase implements PagamentoWebHookPort {
 
         atualizarDadosPagamento(dadosPagamento);
         pagamentoUseCasePort.atualizarPagamento(dadosPagamento);
+
+        pedidoPort.atualizarStatusPedido(numeroPedido);
     }
 
     private static void atualizarDadosPagamento(DadosPagamento dadosPagamento) {
